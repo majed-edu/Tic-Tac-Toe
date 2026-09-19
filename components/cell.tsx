@@ -1,15 +1,22 @@
-
 type CellProps = {
-  go: string;
-  setGo: (value: string) => void;
+  id: number;
+  cell: string;
+  isWinningSquare: boolean;
+  disabled: boolean;
+  onClick: (id: number) => void;
 };
 
-function Cell ({go, setGo}: CellProps) {
+function Cell({ id, cell, isWinningSquare, disabled, onClick }: CellProps) {
   return (
-    <div className="square">
-
-    </div>
-  )
+    <button
+      className={`square ${cell} ${isWinningSquare ? "winning" : ""}`}
+      onClick={() => onClick(id)}
+      disabled={disabled || !!cell}
+      aria-label={`Square ${id + 1}`}
+    >
+      {cell === "circle" ? "O" : cell === "cross" ? "X" : ""}
+    </button>
+  );
 }
 
 export default Cell;
